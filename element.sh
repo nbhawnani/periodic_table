@@ -4,7 +4,7 @@ if [[ -z $1 ]]
 then
   echo 'Please provide an element as an argument.'
 else
-  ELEMENTFOUND=$($PSQL "select E.atomic_number,E.symbol,E.name,P.type_id,P.atomic_mass,P.melting_point_celsius,boiling_point_celsius from properties P inner join elements E ON P.atomic_number=E.atomic_number where E.atomic_number::text='$1' or E.symbol='$1' or E.name='$1';")
+  ELEMENTFOUND=$($PSQL "select E.atomic_number,E.symbol,E.name,T.type,P.atomic_mass,P.melting_point_celsius,boiling_point_celsius from properties P inner join elements E ON P.atomic_number=E.atomic_number inner join types T on P.type_id=T.type_id where E.atomic_number::text='$1' or E.symbol='$1' or E.name='$1';")
 
   echo "$ELEMENTFOUND" | while read ATOMIC_NUMBER BAR SYMBOL BAR NAME BAR TYPE_ID BAR ATOMIC_MASS BAR MELTING_POINT BAR BOILING_POINT
     do
