@@ -1,5 +1,3 @@
-#echo -e 'Please provide an element as an argument.'
-#echo $1
 PSQL="psql -X --username=freecodecamp --dbname=periodic_table --tuples-only -c"
 
 if [[ -z $1 ]]
